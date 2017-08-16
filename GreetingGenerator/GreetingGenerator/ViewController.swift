@@ -46,11 +46,6 @@ class ViewController: UIViewController {
 //    })
 //    nameObservible.bind(to: greetingsLabel.rx.text).addDisposableTo(disposeBag)
 
-    let greetingWithNameObservible: Observable<String?> = Observable.combineLatest(nameObservible, greetingObservible) { (string1: String?, string2: String?) -> String? in
-      return string1! + ", " + string2!
-      }
-    greetingWithNameObservible.bind(to: greetingsLabel.rx.text).addDisposableTo(disposeBag)
-
     let segmentControlObservible: Observable<Int> = stateSegmentControl.rx.value.asObservable()
     let stateObservable: Observable<State> = segmentControlObservible.map { (selectIndex: Int) -> State in
       return State(rawValue: selectIndex)!
@@ -69,6 +64,18 @@ class ViewController: UIViewController {
         self.lastSelectedGreeting.value = button.currentTitle!
       }).addDisposableTo(disposeBag)
     }
+
+    let predefineGreetingObservable: Observable<String> = lastSelectedGreeting.asObservable()
+    let finalGreetingWithNameObservable: Observable<String> = Observable.combineLatest(stateObservable, greetingObservible, predefineGreetingObservable, nameObservible) { (state: State, customGreeting: String?, predefineGretting, name: String?) -> String in
+      switch state {
+      case .useTextField: return customGreeting! + ", " + name!
+      case .useButtons: return predefineGretting + ", " + name!
+      }
+    }
+
+    finalGreetingWithNameObservable.bind(to: greetingsLabel.rx.text).addDisposableTo(disposeBag)
+
   }
+
 }
 
