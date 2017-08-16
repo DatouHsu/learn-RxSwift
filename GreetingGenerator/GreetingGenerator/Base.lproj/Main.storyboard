@@ -95,7 +95,14 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="greetingsLabel" destination="dnJ-Vt-c14" id="g08-45-0dC"/>
+                        <outlet property="greetingsTextField" destination="HkQ-Wk-X5K" id="MFx-vD-9TX"/>
+                        <outlet property="nameTextField" destination="pQn-w0-20i" id="kUd-qs-Mko"/>
                         <outlet property="stateSegmentControl" destination="Pbs-tW-Z4O" id="f4l-Wo-qLV"/>
+                        <outletCollection property="greetingButtons" destination="2FL-Dw-2DZ" collectionClass="NSMutableArray" id="Ng2-BV-1ct"/>
+                        <outletCollection property="greetingButtons" destination="RYN-0N-Ajc" collectionClass="NSMutableArray" id="sYN-WQ-p2o"/>
+                        <outletCollection property="greetingButtons" destination="NX6-sr-qBl" id="wNn-Z5-alx"/>
+                        <outletCollection property="greetingButtons" destination="oeJ-Pb-1xf" id="MKp-je-gFF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

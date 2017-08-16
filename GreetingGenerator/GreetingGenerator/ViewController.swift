@@ -26,7 +26,15 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+
+    let nameObservible: Observable<String?> = nameTextField.rx.text.asObservable()
+    nameObservible.subscribe({ (event: Event<String?>) in
+      switch event {
+      case .completed: print("Complete")
+      case .error(_): print("Error")
+      case .next(let string): print("\(string)")
+      }
+    })
   }
 
 }
