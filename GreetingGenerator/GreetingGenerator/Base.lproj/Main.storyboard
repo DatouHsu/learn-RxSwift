@@ -25,8 +25,8 @@
                                 <rect key="frame" x="16" y="142" width="343" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
+                                    <segment title="Use Button"/>
+                                    <segment title="Use Text Field"/>
                                 </segments>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dnJ-Vt-c14">
@@ -101,8 +101,8 @@
                         <outlet property="stateSegmentControl" destination="Pbs-tW-Z4O" id="f4l-Wo-qLV"/>
                         <outletCollection property="greetingButtons" destination="2FL-Dw-2DZ" collectionClass="NSMutableArray" id="Ng2-BV-1ct"/>
                         <outletCollection property="greetingButtons" destination="RYN-0N-Ajc" collectionClass="NSMutableArray" id="sYN-WQ-p2o"/>
-                        <outletCollection property="greetingButtons" destination="NX6-sr-qBl" id="wNn-Z5-alx"/>
-                        <outletCollection property="greetingButtons" destination="oeJ-Pb-1xf" id="MKp-je-gFF"/>
+                        <outletCollection property="greetingButtons" destination="NX6-sr-qBl" collectionClass="NSMutableArray" id="wNn-Z5-alx"/>
+                        <outletCollection property="greetingButtons" destination="oeJ-Pb-1xf" collectionClass="NSMutableArray" id="MKp-je-gFF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
