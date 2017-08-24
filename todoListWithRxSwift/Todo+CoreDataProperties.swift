@@ -12,7 +12,7 @@ import CoreData
 
 extension Todo {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Todo> {
+    @nonobjc public class func todoFetchRequest() -> NSFetchRequest<Todo> {
         return NSFetchRequest<Todo>(entityName: "Todo")
     }
 

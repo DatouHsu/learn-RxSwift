@@ -18,6 +18,7 @@
 		09BA92681F4DDCD7001C1F90 /* Todo+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA92661F4DDCD7001C1F90 /* Todo+CoreDataProperties.swift */; };
 		09BA926A1F4DED51001C1F90 /* TodoDataAccessProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA92691F4DED51001C1F90 /* TodoDataAccessProvider.swift */; };
 		09BA926C1F4DED7D001C1F90 /* todoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA926B1F4DED7D001C1F90 /* todoViewModel.swift */; };
+		09E3C6B01F4F13E600558E61 /* TodoListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3C6AF1F4F13E600558E61 /* TodoListViewModelTests.swift */; };
 		13B1BB899F763EAFE10E69EE /* Pods_todoListWithRxSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4CD5200958A143C2DA725D7 /* Pods_todoListWithRxSwiftTests.framework */; };
 		1DDA62024DBB70913D5A344D /* Pods_todoListWithRxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC317451C2B51F93E3B4ACE0 /* Pods_todoListWithRxSwift.framework */; };
 /* End PBXBuildFile section */
@@ -48,6 +49,7 @@
 		09BA92661F4DDCD7001C1F90 /* Todo+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Todo+CoreDataProperties.swift"; path = "../Todo+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		09BA92691F4DED51001C1F90 /* TodoDataAccessProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoDataAccessProvider.swift; sourceTree = "<group>"; };
 		09BA926B1F4DED7D001C1F90 /* todoViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = todoViewModel.swift; sourceTree = "<group>"; };
+		09E3C6AF1F4F13E600558E61 /* TodoListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListViewModelTests.swift; sourceTree = "<group>"; };
 		55571428C4D9E376F6C99984 /* Pods-todoListWithRxSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todoListWithRxSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-todoListWithRxSwift/Pods-todoListWithRxSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		956A539312375E87314903E4 /* Pods-todoListWithRxSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todoListWithRxSwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-todoListWithRxSwiftTests/Pods-todoListWithRxSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A4CD5200958A143C2DA725D7 /* Pods_todoListWithRxSwiftTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_todoListWithRxSwiftTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -119,6 +121,7 @@
 			children = (
 				09BA925A1F4DDC80001C1F90 /* todoListWithRxSwiftTests.swift */,
 				09BA925C1F4DDC80001C1F90 /* Info.plist */,
+				09E3C6AF1F4F13E600558E61 /* TodoListViewModelTests.swift */,
 			);
 			path = todoListWithRxSwiftTests;
 			sourceTree = "<group>";
@@ -359,6 +362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09E3C6B01F4F13E600558E61 /* TodoListViewModelTests.swift in Sources */,
 				09BA925B1F4DDC80001C1F90 /* todoListWithRxSwiftTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
