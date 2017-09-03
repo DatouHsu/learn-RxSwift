@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import RxCocoa
+import RxSwift
 
 class ViewController: UIViewController {
 
@@ -20,9 +22,14 @@ class ViewController: UIViewController {
   @IBOutlet weak var registerButton: UIButton!
   @IBOutlet weak var loginButton: UIBarButtonItem!
 
+  let disposeBag = DisposeBag()
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    // Do any additional setup after loading the view, typically from a nib.
+    let viewModel = RegisterViewModel()
+    usernameTextField.rx.text.orEmpty.bind(to: viewModel.username).disposed(by: disposeBag)
+    viewModel.usernameUsable.bind(to: usernameLabel.rx.validationResult).disposed(by: disposeBag)
+    viewModel.usernameUsable.bind(to: passwordTextField.rx.inputEnabled).disposed(by: disposeBag)
   }
 
   override func didReceiveMemoryWarning() {

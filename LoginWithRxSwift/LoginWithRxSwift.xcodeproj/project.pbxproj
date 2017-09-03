@@ -13,6 +13,9 @@
 		09E3F6D61F5BF1D500553623 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09E3F6D51F5BF1D500553623 /* Assets.xcassets */; };
 		09E3F6D91F5BF1D500553623 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09E3F6D71F5BF1D500553623 /* LaunchScreen.storyboard */; };
 		09E3F6E41F5BF1D500553623 /* LoginWithRxSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3F6E31F5BF1D500553623 /* LoginWithRxSwiftTests.swift */; };
+		09E3F6EF1F5BFB4600553623 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3F6EE1F5BFB4600553623 /* Protocol.swift */; };
+		09E3F6F11F5BFC1F00553623 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3F6F01F5BFC1F00553623 /* Service.swift */; };
+		09E3F6F31F5BFF9700553623 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09E3F6F21F5BFF9700553623 /* RegisterViewModel.swift */; };
 		7D6CDE693CAA48A7266DF45C /* Pods_LoginWithRxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2596D5A31C02D5305EB6267 /* Pods_LoginWithRxSwift.framework */; };
 		CE6CB45F478910B573612DAF /* Pods_LoginWithRxSwiftTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C60B98AAA176FBAFDC76DD7C /* Pods_LoginWithRxSwiftTests.framework */; };
 /* End PBXBuildFile section */
@@ -38,6 +41,9 @@
 		09E3F6DF1F5BF1D500553623 /* LoginWithRxSwiftTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LoginWithRxSwiftTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		09E3F6E31F5BF1D500553623 /* LoginWithRxSwiftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginWithRxSwiftTests.swift; sourceTree = "<group>"; };
 		09E3F6E51F5BF1D500553623 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09E3F6EE1F5BFB4600553623 /* Protocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		09E3F6F01F5BFC1F00553623 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		09E3F6F21F5BFF9700553623 /* RegisterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		0F541088C5A4F336CEC0E518 /* Pods-LoginWithRxSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginWithRxSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LoginWithRxSwift/Pods-LoginWithRxSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		548979899A5F75F6F530DF86 /* Pods-LoginWithRxSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginWithRxSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-LoginWithRxSwift/Pods-LoginWithRxSwift.release.xcconfig"; sourceTree = "<group>"; };
 		5994B32E8A395E3B2DBF57D6 /* Pods-LoginWithRxSwiftTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LoginWithRxSwiftTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-LoginWithRxSwiftTests/Pods-LoginWithRxSwiftTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -91,6 +97,9 @@
 			children = (
 				09E3F6CE1F5BF1D500553623 /* AppDelegate.swift */,
 				09E3F6D01F5BF1D500553623 /* ViewController.swift */,
+				09E3F6EE1F5BFB4600553623 /* Protocol.swift */,
+				09E3F6F21F5BFF9700553623 /* RegisterViewModel.swift */,
+				09E3F6F01F5BFC1F00553623 /* Service.swift */,
 				09E3F6D21F5BF1D500553623 /* Main.storyboard */,
 				09E3F6D51F5BF1D500553623 /* Assets.xcassets */,
 				09E3F6D71F5BF1D500553623 /* LaunchScreen.storyboard */,
@@ -331,7 +340,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				09E3F6D11F5BF1D500553623 /* ViewController.swift in Sources */,
+				09E3F6F31F5BFF9700553623 /* RegisterViewModel.swift in Sources */,
+				09E3F6F11F5BFC1F00553623 /* Service.swift in Sources */,
 				09E3F6CF1F5BF1D500553623 /* AppDelegate.swift in Sources */,
+				09E3F6EF1F5BFB4600553623 /* Protocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -543,6 +555,7 @@
 				09E3F6EA1F5BF1D500553623 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		09E3F6EB1F5BF1D500553623 /* Build configuration list for PBXNativeTarget "LoginWithRxSwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -551,6 +564,7 @@
 				09E3F6ED1F5BF1D500553623 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
