@@ -13,6 +13,12 @@ import RxCocoa
 class RegisterViewModel {
   let username = Variable<String>("")
   let usernameUsable: Observable<Result>
+  // input:
+  let password = Variable<String>("")
+  let repeatPassword = Variable<String>("")
+  // output:
+  let passwordUsable: Observable<Result>
+  let repeatPasswordUsable: Observable<Result>
 
   init() {
     let service = ValidationService.instance
@@ -22,6 +28,15 @@ class RegisterViewModel {
         .observeOn(MainScheduler.instance)
         .catchErrorJustReturn(.failed(message: "username出事了"))
     }).shareReplay(1)
+
+    passwordUsable = password.asObservable().map { password in
+        return service.validatePassword(password)
+      }.shareReplay(1)
+
+    repeatPasswordUsable = Observable.combineLatest(password.asObservable(), repeatPassword.asObservable()) {
+   		 return service.validateRepeatedPassword($0, repeatedPasswordword: $1)
+      }.shareReplay(1)
+    
   }
   
 }

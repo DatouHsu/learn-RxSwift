@@ -21,9 +21,29 @@ class ValidationService {
     }
 
     if username.characters.count < minCharactersCount {
-      return .just(.failed(message: "帳號長度至少6個字元"))
+      return .just(.failed(message:"帳號長度至少6個字元"))
     }
-    return .just(.ok(message: "帳號可用"))
+    return .just(.ok(message:"帳號可用"))
+  }
+
+  func validatePassword(_ password: String) -> Result {
+    if password.characters.count == 0 {
+      return .empty
+    }
+    if password.characters.count < minCharactersCount {
+      return .failed(message:"密碼長度至少6個字元")
+    }
+    return .ok(message:"密碼可用")
+  }
+
+  func validateRepeatedPassword(_ password: String, repeatedPasswordword: String) -> Result {
+    if repeatedPasswordword.characters.count == 0 {
+      return .empty
+    }
+    if repeatedPasswordword == password {
+      return .ok(message:"密碼可用")
+    }
+    return .failed(message:"密碼不一樣, 驗證失敗")
   }
 
 }

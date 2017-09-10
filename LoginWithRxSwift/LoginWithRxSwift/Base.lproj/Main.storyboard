@@ -84,22 +84,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpE-U8-wph">
-                                <rect key="frame" x="112" y="383" width="150" height="40"/>
-                                <color key="backgroundColor" red="0.30523252020000002" green="0.67018145900000003" blue="0.90568073839999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="150" id="XDV-4D-QtY"/>
-                                    <constraint firstAttribute="height" constant="40" id="goP-hH-0XW"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                <state key="normal" title="註冊">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="disabled" title="注册">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" red="0.2422866434" green="0.2422866434" blue="0.2422866434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ScU-6I-tkh">
+                                <rect key="frame" x="16" y="221" width="74" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aoI-VM-m5e">
                                 <rect key="frame" x="112" y="305" width="150" height="30"/>
                                 <constraints>
@@ -123,20 +113,31 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ScU-6I-tkh">
-                                <rect key="frame" x="16" y="221" width="74" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QpE-U8-wph">
+                                <rect key="frame" x="112" y="421" width="150" height="40"/>
+                                <color key="backgroundColor" red="0.16737856776766996" green="0.62226163077048036" blue="0.88507080078125" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="TNf-ES-50F"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <state key="normal" title="註冊">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled" title="注册">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.2422866434" green="0.2422866434" blue="0.2422866434" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="QpE-U8-wph" firstAttribute="centerX" secondItem="fwM-s2-jgW" secondAttribute="centerX" id="5OP-dw-dVc"/>
+                            <constraint firstItem="QpE-U8-wph" firstAttribute="trailing" secondItem="aoI-VM-m5e" secondAttribute="trailing" id="6gJ-4y-xrY"/>
                             <constraint firstItem="3CV-CD-x9r" firstAttribute="top" secondItem="GAg-mY-Cr9" secondAttribute="bottom" constant="69" id="7SB-fR-Jft"/>
                             <constraint firstItem="u0e-Rm-XBf" firstAttribute="top" secondItem="GAg-mY-Cr9" secondAttribute="bottom" constant="64" id="BSY-Vv-gHQ"/>
                             <constraint firstAttribute="leadingMargin" secondItem="3CV-CD-x9r" secondAttribute="leading" id="Chn-YR-m5e"/>
                             <constraint firstItem="PLa-c3-hji" firstAttribute="top" secondItem="FLB-HM-Dk2" secondAttribute="bottom" constant="9" id="GK9-7b-Ts3"/>
+                            <constraint firstItem="QpE-U8-wph" firstAttribute="leading" secondItem="aoI-VM-m5e" secondAttribute="leading" id="Hii-g7-XV7"/>
+                            <constraint firstItem="QpE-U8-wph" firstAttribute="top" secondItem="2tz-yg-6Ls" secondAttribute="bottom" constant="63" id="IZz-vi-ilx"/>
                             <constraint firstItem="aoI-VM-m5e" firstAttribute="centerX" secondItem="fwM-s2-jgW" secondAttribute="centerX" id="JEh-g0-iC7"/>
                             <constraint firstItem="PLa-c3-hji" firstAttribute="centerX" secondItem="fwM-s2-jgW" secondAttribute="centerX" id="Ji7-QO-mk4"/>
                             <constraint firstItem="aoI-VM-m5e" firstAttribute="top" secondItem="PLa-c3-hji" secondAttribute="bottom" constant="36" id="KIH-eQ-T7c"/>
@@ -149,7 +150,6 @@
                             <constraint firstItem="ScU-6I-tkh" firstAttribute="leading" secondItem="RS2-Se-18F" secondAttribute="leading" id="fCj-md-W8O"/>
                             <constraint firstItem="u0e-Rm-XBf" firstAttribute="centerX" secondItem="fwM-s2-jgW" secondAttribute="centerX" id="iib-ac-lNF"/>
                             <constraint firstItem="2tz-yg-6Ls" firstAttribute="centerX" secondItem="fwM-s2-jgW" secondAttribute="centerX" id="l20-1D-O1b"/>
-                            <constraint firstItem="QpE-U8-wph" firstAttribute="top" secondItem="2tz-yg-6Ls" secondAttribute="bottom" constant="25" id="mCt-VV-WSc"/>
                             <constraint firstItem="ScU-6I-tkh" firstAttribute="top" secondItem="3CV-CD-x9r" secondAttribute="bottom" constant="67" id="oQU-0c-lee"/>
                             <constraint firstItem="UBV-DL-GQ4" firstAttribute="top" secondItem="RS2-Se-18F" secondAttribute="bottom" constant="336" id="tmp-8j-1zS"/>
                             <constraint firstItem="DZe-3T-4Rc" firstAttribute="centerX" secondItem="fwM-s2-jgW" secondAttribute="centerX" id="vFa-bL-Lvs"/>
