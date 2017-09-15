@@ -55,4 +55,43 @@ class ValidationService {
     return .just(.failed(message: "註冊失敗"))
   }
 
+  func usernameValid(_ username: String) -> Bool {
+    let filePath = NSHomeDirectory() + "/Documents/users.plist"
+    let userDic = NSDictionary(contentsOfFile: filePath)
+    let usernameArray = userDic?.allKeys
+    guard usernameArray != nil else {
+      return false
+    }
+
+    if (usernameArray! as NSArray).contains(username ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  func loginUsernameValid(_ username: String) -> Observable<Result> {
+    if username.characters.count == 0 {
+      return .just(.empty)
+    }
+
+    if usernameValid(username) {
+      return .just(.ok(message: "用户名可用"))
+    }
+    return .just(.failed(message: "用户名不存在"))
+  }
+
+  func login(_ username: String, password: String) -> Observable<Result> {
+    let filePath = NSHomeDirectory() + "/Documents/users.plist"
+    let userDic = NSDictionary(contentsOfFile: filePath)
+    if let userPass = userDic?.object(forKey: username) as? String {
+      if  userPass == password {
+        return .just(.ok(message: "登入成功"))
+      }
+    }
+    return .just(.failed(message: "密碼錯誤"))
+  }
+
 }
+
+
