@@ -46,4 +46,13 @@ class ValidationService {
     return .failed(message:"密碼不一樣, 驗證失敗")
   }
 
+  func register(_ username: String, password: String) -> Observable<Result> {
+    let userDic = [username: password]
+    let filePath = NSHomeDirectory() + "/Documents/users.plist"
+    if (userDic as NSDictionary).write(toFile: filePath, atomically: true) {
+      return .just(.ok(message: "註冊成功"))
+    }
+    return .just(.failed(message: "註冊失敗"))
+  }
+
 }
