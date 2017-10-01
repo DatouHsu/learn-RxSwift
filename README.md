@@ -1,11 +1,11 @@
 # RxSwift 學習心得 (持續更新中)
 
-##MVVM
+## MVVM
 ![](/Users/datou/Documents/Datou/onlyRxSwift/image/image1.png)
 MVVM的大原則就是將原本在ViewController的View顯示邏輯，驗證邏輯，網絡請求等存放於ViewModel中, 盡量去避免所謂`Massive Controller`發生. 讓邏輯判斷等只有在ViewModel底下發生, 外界只需要領取結果即可.
 
 
-##進入RxSwift的世界
+## 進入RxSwift的世界
 **Hot Signal vs Cold Signal:**
 冷熱信號的概念源於C#的MVVM框架Reactive Extensions中的Hot Observables和Cold Observables: (這裡面的Observables可以理解為RACSignal。)
 
