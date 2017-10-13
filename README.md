@@ -1,11 +1,45 @@
 # RxSwift 學習心得 (持續更新中)
 
+> 有什麼問題都歡迎提出糾正、討論。肛溫
+
 ## MVVM
+**誕生的原因：**平常Apple推導的MVC架構非常容易讓大家把code都寫在Controller底下，造成controller對比View、Model異常肥大，才有了傳說中的Massive Controller的稱號.
+
+**MVVM介紹：**
+MVVM分別是 View、ViewModel、Model.
+View: 通常都是Image、Button等常見元件組成，在這裡並不會出現任何有關邏輯、狀態轉換相關的code.
+Model: 就是資料的集合.
+
+最理想的設計就是當Model裡面的資料有變化的時候，View的狀態就直接跟著轉變。但世界上應該沒這麼方便的事情，Model的資料不一定可以直接套用在View上，所以會需要一個中間層來協助資料的串接.
+
+`ViewModel`的職責就如同名字上所示，是將View跟Model綁起來，如下圖所示，MVC的Controller已經包含在View底下. View跟ViewModel之間透過Controller來實現`綁定`這個動作.
+
+在這裡的`Controller`的工作就會相對單純，只需要負責呈現View相關的Code (比如tableView Delegate 跟 DataSource相關的程式)、以及上述的進行跟ViewModel之間的綁定
+
+> Hint: 一般來說，進行`綁定`的動作會透過Reactive Programming的方式比較直接 (ex. ReactiveCocoa、ReactiveSwift、RxSwift)
+
 ![](/Users/datou/Documents/Datou/onlyRxSwift/image/image1.png)
-MVVM的大原則就是將原本在ViewController的View顯示邏輯，驗證邏輯，網絡請求等存放於ViewModel中, 盡量去避免所謂`Massive Controller`發生. 讓邏輯判斷等只有在ViewModel底下發生, 外界只需要領取結果即可.
+
+MVVM的大原則就是將原本在ViewController的`View顯示邏輯`，`驗證邏輯`，`網絡請求`等存放於ViewModel中, 盡量去避免所謂`Massive Controller`發生. 讓邏輯判斷等只有在ViewModel底下發生, 外界只需要領取結果即可.
+
+ViewModel之於View、Model有點像是一個BlackBox, 只需要知道`將值輸入`、`接收改變後的值`	即可，並不需要去知道ViewModel做了什麼事情.
+
+好處：可以將Controller輕量化、將職責分得更清楚、方便測試（還在感受中...）
 
 
 ## 進入RxSwift的世界
+
+### 什麼是 Observable & Observer
+在正式使用RxSwift之前想先大概介紹一下什麼是Observable跟Observer. 
+
+首先提一下之前某篇文章舉的例子, 假設現在有一個小孩在房間裡睡覺, 當他醒來開始哭鬧的時候, 大人聽到哭聲就會跑到房間做相對應的事情. 在這裡小孩就是`Observable`，大人是`Observer`，哭鬧則是`事件`
+> Hint: 在RxSwift的世界中, Observable會產生所謂的事件, 當Observer訂閱之後, 就會針對收到的事件進行動作.
+
+**Observable**
+顧名思義就是一個`可被觀察者`的, 
+
+**Observer**
+
 **Hot Signal vs Cold Signal:**
 冷熱信號的概念源於C#的MVVM框架Reactive Extensions中的Hot Observables和Cold Observables: (這裡面的Observables可以理解為RACSignal。)
 
@@ -16,6 +50,8 @@ MVVM的大原則就是將原本在ViewController的View顯示邏輯，驗證邏�
 
 
 
+### [RxSwift Community](https://github.com/RxSwiftCommunity)
+[NSObject-Rx](https://github.com/RxSwiftCommunity/NSObject-Rx): 如果覺得一直宣告`disposeBag`很麻煩的話，可以考慮import這個.
 
 ### 巨人們 (我站在他們的肩膀看RxSwift):
 * [ReactiveX/RxSwift.github](https://github.com/ReactiveX/RxSwift)
@@ -23,3 +59,4 @@ MVVM的大原則就是將原本在ViewController的View顯示邏輯，驗證邏�
 * [RxMarbles](http://rxmarbles.com/)
 * https://academy.realm.io/posts/slug-max-alexander-mvvm-rxswift/?
 * https://coderwall.com/p/vti_8w/rxswift-learning-resources
+* https://www.teehanlax.com/blog/model-view-viewmodel-for-ios/
