@@ -32,23 +32,28 @@ ViewModel之於View、Model有點像是一個BlackBox, 只需要知道`將值輸
 ### 什麼是 Observable & Observer
 在正式使用RxSwift之前想先大概介紹一下什麼是Observable跟Observer. 
 
-首先提一下之前某篇文章舉的例子, 假設現在有一個小孩在房間裡睡覺, 當他醒來開始哭鬧的時候, 大人聽到哭聲就會跑到房間做相對應的事情. 在這裡小孩就是`Observable`，大人是`Observer`，哭鬧則是`事件`
-> Hint: 在RxSwift的世界中, Observable會產生所謂的事件, 當Observer訂閱之後, 就會針對收到的事件進行動作.
+首先提一下之前某篇文章舉的例子, 假設現在有一個小孩在房間裡睡覺, 當他醒來開始哭鬧的時候, 大人聽到哭聲就會跑到房間做相對應的事情. 在這裡小孩就是`Observable`，大人是`Observer`，哭鬧則是`事件`, 那事件不一定只有一個，小孩哭的原因很多，爸爸媽媽都是觀察者，如果是`肚子餓事件`就交給媽媽餵奶，`換尿布事件`就交給爸爸換。
+
+將這概念套回到RxSwift中，一個`被觀察者`可以被很多的`觀察者`訂閱，就像是爸爸媽媽關注自己的小孩一樣，而小孩的狀態會一直隨著時間而有不一樣的變化，所以我們可以產生下面這張圖，橫軸可以想像成時間，時間是由左往右移動，上面這些圓圈就是所謂的事件。
+
+![](/Users/datou/Documents/Datou/onlyRxSwift/image/Screen Shot 2017-10-14 at 3.32.25 AM.png)
+
+> Hint: 在RxSwift的世界中, Observable會產生所謂的事件, 當Observer訂閱之後, 就會針對收到的事件進行動作. 上圖中的箭號也俗稱為`Sequences`
 
 **Observable**
 顧名思義就是一個`可被觀察者`的, 
 
 **Observer**
 
-**Hot Signal vs Cold Signal:**
+**Hot Signal vs Cold Signal：**
 冷熱信號的概念源於C#的MVVM框架Reactive Extensions中的Hot Observables和Cold Observables: (這裡面的Observables可以理解為RACSignal。)
 
 `Hot Observables`和`Cold Observables`的區別：
 * `Hot Observables`是主動的，儘管你並沒有訂閱事件，但是它會時刻推送，就像鼠標移動；而`Cold Observables`是被動的，只有當你訂閱的時候，它才會發布消息。
-* `Hot Observables`可以有多個訂閱者，是一對多，集合可以與訂閱者共享信息；而`Cold Observables`只能一對一，當有不同的訂閱者，消息是重新完整髮送。
+* `Hot Observables`可以有多個訂閱者，是一對多，集合可以與訂閱者共享信息；而`Cold Observables`只能一對一，當有不同的訂閱者，消息是重新完整發送。
 > Hint: 任何的信號轉換即是對原有的信號進行訂閱從而產生新的信號
 
-
+**DisposeBag：**
 
 ### [RxSwift Community](https://github.com/RxSwiftCommunity)
 [NSObject-Rx](https://github.com/RxSwiftCommunity/NSObject-Rx): 如果覺得一直宣告`disposeBag`很麻煩的話，可以考慮import這個.
