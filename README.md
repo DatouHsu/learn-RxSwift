@@ -3,7 +3,7 @@
 > 有什麼問題都歡迎提出糾正、討論。肛溫
 
 ## MVVM
-**誕生的原因：**平常Apple推導的MVC架構非常容易讓大家把code都寫在Controller底下，造成controller對比View、Model異常肥大，才有了傳說中的Massive Controller的稱號.
+**誕生的原因：** 平常Apple推導的MVC架構非常容易讓大家把code都寫在Controller底下，造成controller對比View、Model異常肥大，才有了傳說中的Massive Controller的稱號.
 
 **MVVM介紹：**
 MVVM分別是 View、ViewModel、Model.
@@ -18,7 +18,7 @@ Model: 就是資料的集合.
 
 > Hint: 一般來說，進行`綁定`的動作會透過Reactive Programming的方式比較直接 (ex. ReactiveCocoa、ReactiveSwift、RxSwift)
 
-![](/Users/datou/Documents/Datou/onlyRxSwift/image/image1.png)
+![](/image/image1.png)
 
 MVVM的大原則就是將原本在ViewController的`View顯示邏輯`，`驗證邏輯`，`網絡請求`等存放於ViewModel中, 盡量去避免所謂`Massive Controller`發生. 讓邏輯判斷等只有在ViewModel底下發生, 外界只需要領取結果即可.
 
@@ -36,7 +36,7 @@ ViewModel之於View、Model有點像是一個BlackBox, 只需要知道`將值輸
 
 將這概念套回到RxSwift中，一個`被觀察者`可以被很多的`觀察者`訂閱，就像是爸爸媽媽關注自己的小孩一樣，而小孩的狀態會一直隨著時間而有不一樣的變化，所以我們可以產生下面這張圖，橫軸可以想像成時間，時間是由左往右移動，上面這些圓圈就是所謂的事件。
 
-![](/Users/datou/Documents/Datou/onlyRxSwift/image/Screen Shot 2017-10-14 at 3.32.25 AM.png)
+![](/image/Screen Shot 2017-10-14 at 3.32.25 AM.png)
 
 > Hint: 在RxSwift的世界中, Observable會產生所謂的事件, 當Observer訂閱之後, 就會針對收到的事件進行動作. 上圖中的箭號也俗稱為`Sequences`
 
