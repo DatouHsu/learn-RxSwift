@@ -3,7 +3,7 @@
 > 有什麼問題都歡迎提出糾正、討論。肛溫
 
 ## MVVM
-**誕生的原因：**平常Apple推導的MVC架構非常容易讓大家把code都寫在Controller底下，造成controller對比View、Model異常肥大，才有了傳說中的Massive Controller的稱號.
+**誕生的原因：** 平常Apple推導的MVC架構非常容易讓大家把code都寫在Controller底下，造成controller對比View、Model異常肥大，才有了傳說中的Massive Controller的稱號.
 
 **MVVM介紹：**
 MVVM分別是 View、ViewModel、Model.
@@ -55,9 +55,14 @@ ViewModel之於View、Model有點像是一個BlackBox, 只需要知道`將值輸
 
 **DisposeBag：**
 
+shareRply 看情況用 能不用就不要亂用
+pulishSubject vs behaviorSubject 的最主要的差異是, behaviorSubject在有人訂閱的時候·會先傳送當前的值給Observer.
+
 ### [RxSwift Community](https://github.com/RxSwiftCommunity)
 [NSObject-Rx](https://github.com/RxSwiftCommunity/NSObject-Rx): 如果覺得一直宣告`disposeBag`很麻煩的話，可以考慮import這個.
 
+* https://github.com/DroidsOnRoids/RxSwiftExamples
+* 
 ### 巨人們 (我站在他們的肩膀看RxSwift):
 * [ReactiveX/RxSwift.github](https://github.com/ReactiveX/RxSwift)
 * [Thinking in RxSwift](http://adamborek.com/rxswift-materials-list/)
