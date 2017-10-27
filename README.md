@@ -7,14 +7,16 @@
 
 **MVVM介紹：**
 MVVM分別是 View、ViewModel、Model.
-View: 通常都是Image、Button等常見元件組成，在這裡並不會出現任何有關邏輯、狀態轉換相關的code.
-Model: 就是資料的集合.
 
-最理想的設計就是當Model裡面的資料有變化的時候，View的狀態就直接跟著轉變。但世界上應該沒這麼方便的事情，Model的資料不一定可以直接套用在View上，所以會需要一個中間層來協助資料的串接.
+`View`: 通常都是Image、Button等常見元件組成，在這裡並不會出現任何有關邏輯、狀態轉換相關的code.
+`Model`: 就是資料的集合亦或者是從Server Side取得的資料.
 
-`ViewModel`的職責就如同名字上所示，是將View跟Model綁起來，如下圖所示，MVC的Controller已經包含在View底下. View跟ViewModel之間透過Controller來實現`綁定`這個動作.
+最理想的設計就是當`Model`裡面的資料有變化的時候，`View`的狀態就直接跟著轉變。
+但世界上應該沒這麼方便的事情，Model的資料不一定可以直接套用在View上，所以會需要一個中間層來協助資料的串接.
 
-在這裡的`Controller`的工作就會相對單純，只需要負責呈現View相關的Code (比如tableView Delegate 跟 DataSource相關的程式)、以及上述的進行跟ViewModel之間的綁定
+而這時候`ViewModel`的職責就如同名字上所示，是將View跟Model綁起來，如下圖所示，MVC的Controller已經包含在View底下. View跟ViewModel之間透過Controller來實現`綁定`這個動作.
+
+在這裡的`Controller`的工作就會相對單純，只需要負責呈現View相關的Code (比如tableView Delegate 跟 DataSource相關的程式)、以及上述的進行跟ViewModel之間的**綁定(bind)**
 
 > Hint: 一般來說，進行`綁定`的動作會透過Reactive Programming的方式比較直接 (ex. ReactiveCocoa、ReactiveSwift、RxSwift)
 
@@ -29,10 +31,12 @@ ViewModel之於View、Model有點像是一個BlackBox, 只需要知道`將值輸
 
 ## 進入RxSwift的世界
 
-### 什麼是 Observable & Observer
-在正式使用RxSwift之前想先大概介紹一下什麼是Observable跟Observer. 
+###### Rx (Reactive Extension 的縮寫)
 
-首先提一下之前某篇文章舉的例子, 假設現在有一個小孩在房間裡睡覺, 當他醒來開始哭鬧的時候, 大人聽到哭聲就會跑到房間做相對應的事情. 在這裡小孩就是`Observable`，大人是`Observer`，哭鬧則是`事件`, 那事件不一定只有一個，小孩哭的原因很多，爸爸媽媽都是觀察者，如果是`肚子餓事件`就交給媽媽餵奶，`換尿布事件`就交給爸爸換。
+### 什麼是 Observable & Observer
+在正式使用RxSwift之前想先大概介紹一下什麼是`Observable`跟`Observer`. 
+
+首先提一下之前某篇文章舉的例子, 假設現在有一個小孩在房間裡睡覺, 當他醒來開始哭鬧的時候, 大人聽到哭聲就會跑到房間做相對應的事情. 在這裡小孩就是`Observable`，大人是`Observer`，哭鬧則是`事件`, 事件不一定只有一個，小孩哭的原因很多，爸爸媽媽都是觀察者，如果是`肚子餓事件`可能就交給媽媽餵奶，`換尿布事件`可能就交給爸爸換，每個Observer都負責不一樣的事情。
 
 將這概念套回到RxSwift中，一個`被觀察者`可以被很多的`觀察者`訂閱，就像是爸爸媽媽關注自己的小孩一樣，而小孩的狀態會一直隨著時間而有不一樣的變化，所以我們可以產生下面這張圖，橫軸可以想像成時間，時間是由左往右移動，上面這些圓圈就是所謂的事件。
 
@@ -40,29 +44,85 @@ ViewModel之於View、Model有點像是一個BlackBox, 只需要知道`將值輸
 
 > Hint: 在RxSwift的世界中, Observable會產生所謂的事件, 當Observer訂閱之後, 就會針對收到的事件進行動作. 上圖中的箭號也俗稱為`Sequences`
 
-**Observable**
-顧名思義就是一個`可被觀察者`的, 
+#### **Observable**
+顧名思義就是一個`可被觀察`的, 有點像是iOS裡面就發射一個 Notification，當監聽這個 Notification的人（Observer）就會有所反應。
+比如說View上面有一個TextField，並且是一個Observable，當每輸入一個字的時候，就會發送一個事件給Observer說目前的TextField的text值為何。
 
-**Observer**
+Observable會產生三種事件 `onNext`，`onCompleted`，`onError`. 分別代表著：
 
-**Hot Signal vs Cold Signal：**
+* onNext: 繼續事件，ex. 在textField上輸入一個 "A" onNext事件就會傳送 "A" 給 Observer.
+* onCompleted: 完成事件，當onCompleted事件送出之後，就不會再傳送任何 `onNext`.
+* onError: 錯誤事件，發生意外之後也會中斷事件發送.
+
+#### **Observer**
+觀察者
+
+**Hot Observables vs Cold Observables：**
+
 冷熱信號的概念源於C#的MVVM框架Reactive Extensions中的Hot Observables和Cold Observables: (這裡面的Observables可以理解為RACSignal。)
 
 `Hot Observables`和`Cold Observables`的區別：
-* `Hot Observables`是主動的，儘管你並沒有訂閱事件，但是它會時刻推送，就像鼠標移動；而`Cold Observables`是被動的，只有當你訂閱的時候，它才會發布消息。
-* `Hot Observables`可以有多個訂閱者，是一對多，集合可以與訂閱者共享信息；而`Cold Observables`只能一對一，當有不同的訂閱者，消息是重新完整發送。
+
+1. `Hot Observables`是主動的，儘管你並沒有訂閱事件，但是它會時刻推送，就像鼠標移動；
+而`Cold Observables`是被動的，只有當你訂閱的時候，它才會發布消息。
+2. `Hot Observables`可以有多個訂閱者，是一對多，集合可以與訂閱者共享信息；
+而`Cold Observables`只能一對一，當有不同的訂閱者，消息是重新完整發送。
+
+
 > Hint: 任何的信號轉換即是對原有的信號進行訂閱從而產生新的信號
 
-**DisposeBag：**
+#### **Driver vs Observable**
 
-shareRply 看情況用 能不用就不要亂用
+#### **PublisSubject vs BrhaviorSubject vs Variable**
 pulishSubject vs behaviorSubject 的最主要的差異是, behaviorSubject在有人訂閱的時候·會先傳送當前的值給Observer.
 
-### [RxSwift Community](https://github.com/RxSwiftCommunity)
-[NSObject-Rx](https://github.com/RxSwiftCommunity/NSObject-Rx): 如果覺得一直宣告`disposeBag`很麻煩的話，可以考慮import這個.
+#### **DisposeBag：**
+從字面上來看，他就是一個袋子。 他是個有著類似於 ARC 的機制的類別. 把Observable Observer都放進袋子裡面.
 
-* https://github.com/DroidsOnRoids/RxSwiftExamples
-* 
+#####自動釋放
+在一般情況下，系統會自己釋放DisposBag中的東西。調用時機會是，假設一個ViewController要被release掉時，該controller底下的disposBag也會觸發deinit的method。
+
+#####手動釋放
+如果不想要等到 disposeBag 所在物件的生命週期結束才釋放，可以選擇手動將原本的 disposeBag 替換成新的 instance 即可：
+
+```
+self.disposeBag = DisposeBag()
+```
+
+目前官方建議的寫法是:
+
+```
+.disposed(by: disposeBag)
+```
+
+### **UIBindingObserver**
+使用RxSwift開發的時候，一定會需要 import Rxswift，另一個很重要的就是 import RxCocoa，RxCocoa 是Rx團隊針對 Cocoa 所實做的Rx Extension，所以以下這一行才會成立！
+
+```
+	texttextField.rx.text.subscribe(onNext: { text in
+		// Do some things with text
+	}).disposed(by: cell.disposeBag)
+```
+
+但是一定會有RxCocoa的Extension不好用，或是想要讓自訂的Class也享受Rx的功能。 這時候就可以考慮 Extension UIBindingObserver.
+
+
+
+### **常用的Operator**
+**shareRply** (看情況用 能不用就不要亂用)
+map
+flatMapLatest
+skip
+filter
+combineLatest
+observeOn
+
+
+### RxSwift Community
+- [RxSwift Community](https://github.com/RxSwiftCommunity): 想多了解RxSwift還有哪些人家寫好的rxtension library 可以來這裡番
+- [NSObject-Rx](https://github.com/RxSwiftCommunity/NSObject-Rx): 如果覺得一直宣告`disposeBag`很麻煩的話，可以考慮import這個.
+- [RxSwiftExamples](https://github.com/DroidsOnRoids/RxSwiftExamples)
+
 ### 巨人們 (我站在他們的肩膀看RxSwift):
 * [ReactiveX/RxSwift.github](https://github.com/ReactiveX/RxSwift)
 * [Thinking in RxSwift](http://adamborek.com/rxswift-materials-list/)
