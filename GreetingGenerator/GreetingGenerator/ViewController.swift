@@ -54,12 +54,13 @@ class ViewController: UIViewController {
       return state == .useTextField
     }
     greetingTextFieldEnableObservable.bind(to: greetingsTextField.rx.isEnabled).addDisposableTo(disposeBag)
-
+    
     let buttonEnableObservable: Observable<Bool> = greetingTextFieldEnableObservable.map { (greetingEnable: Bool) -> Bool in
       return !greetingEnable
     }
     greetingButtons.forEach { (button) in
       buttonEnableObservable.bind(to: button.rx.isEnabled).addDisposableTo(disposeBag)
+
       button.rx.tap.subscribe(onNext: { (nothing: Void) in
         self.lastSelectedGreeting.value = button.currentTitle!
       }).addDisposableTo(disposeBag)
