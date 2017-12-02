@@ -227,3 +227,8 @@ Extension之後就可以使用 `xxxx.bin(to:myTextField.rx.textFieldEnable)`. �
 * https://academy.realm.io/posts/slug-max-alexander-mvvm-rxswift/?
 * https://coderwall.com/p/vti_8w/rxswift-learning-resources
 * https://www.teehanlax.com/blog/model-view-viewmodel-for-ios/
+
+
+### Recommand Vedio on Youtube:ˇ
+* [RxSwift: Deep Cuts](https://www.youtube.com/watch?v=Y5Noc7FC1b8)
+* [RxSwift in Practice](https://www.youtube.com/watch?v=W3zGx4TUaCE) 
