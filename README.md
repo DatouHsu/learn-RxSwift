@@ -58,17 +58,17 @@ Observable會產生三種事件 `onNext`，`onCompleted`，`onError`. 分別代�
 
 在RxSwift中也可以[自行產生Observable](http://adamborek.com/creating-observable-create-just-deferred/).
 ```
-	return Observable.create { observer in 
-		self.someAsyncOpertation { success: Bool in 
-			if success {
-				observer.onNext(()) //It sends a void into the AnyObserver<Void>
-				observer.onCompleted()
-			} else {
-				observer.onError(MyError())
-			}
+return Observable.create { observer in 
+	self.someAsyncOpertation { success: Bool in 
+		if success {
+			observer.onNext(()) //It sends a void into the AnyObserver<Void>
+			observer.onCompleted()
+		} else {
+			observer.onError(MyError())
 		}
-		return Disposables.create()
 	}
+	return Disposables.create()
+}
 ```
 
 #### Observer
@@ -114,13 +114,13 @@ RxSwift文件提到的有下列三種Subject:
 ex.
 
 ```
-	let subject = BehaviorSubject<String>(value: "Hello RxSwift")
+let subject = BehaviorSubject<String>(value: "Hello RxSwift")
 
-    _ = subject.subscribe(onNext: {
-        print("Hello World 1")
-    })
+_ = subject.subscribe(onNext: {
+    print("Hello World 1")
+})
 
-    subject.onNext("!!!!!!!!")
+subject.onNext("!!!!!!!!")
 ```
 
 使用風險：在Subject被創建後到有Observer訂閱它之前這個時間段內，一個或多個數據可能會丟失。如果要確保來自原始Observable的所有數據都被分發話，可以在Create創建Observable時手動給它引入 `cold Observable`的行為（當所有觀察者都已經訂閱時才開始發射數據
@@ -139,34 +139,76 @@ ex.
 > * ReplaySubject沒有默認消息，訂閱空的ReplaySubject不會收到任何消息
 > * ReplaySubject自帶一個緩衝區，當有Observer訂閱的時候，它會向Observer發送緩衝區內的所有消息
 
-#### Variable
+#### Variable [Deprecated]
+##### 請愛用 BehaviorRelay
 Variable 為BehaviorSubject的封裝，所以在初始化的時候也必須 init 一個初始值。但是 Variable 沒有 on 系列方法，只提供了 value 屬性。直接對 value 進行 set 等同於調用了 onNext 方法。另外還有一點就是 Variable 不會發射 error 事件。
 
 > Hint: 在 Variable 被dispose時會調用發射 completed 給 Observer 。
+> 在 RxSwift 4 中已無法使用. [ref](https://github.com/ReactiveX/RxSwift/blob/master/RxSwift/Deprecated.swift#L170)
 
 ex.
 
 ```
 //在訂閱 Variable 時，我們無法直接調用 subscribe，需要先調用 asObservable
 	
-	let variable = Variable(1)
-	variable.asObservable()
-	    .subscribe { (event) in
-	        print("Event: \(event).")
-	}
-	variable.value = 2
+let variable = Variable(1)
+variable.asObservable()
+	.subscribe { (event) in
+        print("Event: \(event).")
+}
+variable.value = 2
 ```
 
 既然 Variable 只是 BehaviorSubject封裝，那該怎麼選擇使用的時機？
 [BehaviorSubject vs Variable vs other subjects](https://github.com/ReactiveX/RxSwift/issues/487) 關於這個討論可以參考連結！
 
+#### BehaviorRelay：
+
+在使用上很類似於之前的 Variable. 可以直接 subscribe 來使用.
+但是請記得要 `import RxCocoa`, 因為 BehaviorRelay.swift 是存在於 RxCocoa 裡面.
+
+透過 accept() method 對 BehaviorRelay 的值進行修改.
+ 
+##### accept(_ event: Element)
+```
+// Accepts `event` and emits it to subscribers
+public func accept(_ event: Element) {
+    _subject.onNext(event)
+}
+```
+我們可以透過 BehaviorRelay 的 value 來取得當下的值.
+> value 是 read only, 不能被強塞值給 value 一定只能透過上面的 accept() method
+
+##### value
+```
+/// Current value of behavior subject
+public var value: Element {
+    // this try! is ok because subject can't error out or be disposed
+    return try! _subject.value()
+}
+```
+
+**example：**
+
+```
+let behaviorRelay = BehaviorRelay(value: "Test")
+behaviorRelay.asObservable().subscribe { (text) in
+	print("\(text)")
+}.disposed(by: xxxxx)
+
+behaviorRelay.accept("qqq")
+print("\(behaviorRelay.value)")
+
+behaviorRelay.accept(behaviorRelay.value + "wwww")
+```
+
 #### DisposeBag：
 從字面上來看，他就是一個袋子。 他是個有著類似於 ARC 的機制的類別. 把Observable Observer都放進袋子裡面.
 
-#####自動釋放
+##### 自動釋放
 在一般情況下，系統會自己釋放DisposBag中的東西。調用時機會是，假設一個ViewController要被release掉時，該controller底下的disposBag也會觸發deinit的method。
 
-#####手動釋放
+##### 手動釋放
 如果不想要等到 disposeBag 所在物件的生命週期結束才釋放，可以選擇手動將原本的 disposeBag 替換成新的 instance 即可：
 
 ```
@@ -179,26 +221,26 @@ self.disposeBag = DisposeBag()
 .disposed(by: disposeBag)
 ```
 
-### **UIBindingObserver**
+### UIBindingObserver
 使用RxSwift開發的時候，一定會需要 import Rxswift，另一個很重要的就是 import RxCocoa，RxCocoa 是Rx團隊針對 Cocoa 所實做的Rx Extension，所以以下這一行才會成立！
 
 ```
-	texttextField.rx.text.subscribe(onNext: { text in
-		// Do some things with text
-	}).disposed(by: cell.disposeBag)
+texttextField.rx.text.subscribe(onNext: { text in
+	// Do some things with text
+}).disposed(by: cell.disposeBag)
 ```
 
 但是一定會有RxCocoa的Extension不好用，或是想要讓自訂的Class也享受Rx的功能。 這時候就可以考慮 Extension UIBindingObserver.
 
 ex. 
 ```
-	extension Reactive where Base: UITextField {
-	    var textFieldEnable: UIBindingObserver<Base, Result> {
-	        return UIBindingObserver(UIElement: base) { textFiled, result in
-	            textFiled.isEnabled = result.isValid
-	        }
-	    }
+extension Reactive where Base: UITextField {
+	var textFieldEnable: UIBindingObserver<Base, Result> {
+		return UIBindingObserver(UIElement: base) { textFiled, result in
+	   		textFiled.isEnabled = result.isValid
+	   }
 	}
+}
 ```
 Extension之後就可以使用 `xxxx.bin(to:myTextField.rx.textFieldEnable)`. 就可以很方便地把`viewModel`跟`View` bind在一起
 
